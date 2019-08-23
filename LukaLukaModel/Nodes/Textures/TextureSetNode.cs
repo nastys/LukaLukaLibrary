@@ -1,0 +1,121 @@
+﻿using System;
+using System.Drawing;
+using System.Linq;
+using System.IO;
+using System.Windows.Forms;
+using LukaLukaLibrary.Databases;
+using LukaLukaLibrary.IO;
+using LukaLukaLibrary.Textures;
+using LukaLukaModel.Nodes.Databases;
+using LukaLukaModel.Nodes.IO;
+using LukaLukaModel.Nodes.Misc;
+using LukaLukaModel.Resources;
+using Ookii.Dialogs.WinForms;
+
+namespace LukaLukaModel.Nodes.Textures
+{
+    public class TextureSetNode : BinaryFileNode<TextureSet>
+    {
+        private TextureDatabaseNode mTextureDatabaseNode;
+
+        public override NodeFlags Flags =>
+            NodeFlags.Add | NodeFlags.Import | NodeFlags.Export | NodeFlags.Replace | NodeFlags.Rename;
+
+        public override Bitmap Image =>
+            ResourceStore.LoadBitmap( "Icons/TextureSet.png" );
+
+        protected override void Initialize()
+        {
+            RegisterImportHandler<Texture>( filePath =>
+            {
+                var texture = TextureEncoder.Encode( filePath );
+                {
+                    texture.Id = Data.Textures.Max( x => x.Id ) + 1;
+                    texture.Name = Path.GetFileNameWithoutExtension( filePath );
+                }
+                Data.Textures.Add( texture );
+            } );
+            RegisterImportHandler<Bitmap>( filePath =>
+            {
+                var texture = TextureEncoder.Encode( filePath );
+                {
+                    texture.Id = Data.Textures.Max( x => x.Id ) + 1;
+                    texture.Name = Path.GetFileNameWithoutExtension( filePath );
+                }
+                Data.Textures.Add( texture );
+            } );
+            RegisterExportHandler<TextureSet>( filePath => Data.Save( filePath ) );
+            RegisterReplaceHandler<TextureSet>( BinaryFile.Load<TextureSet> );
+            RegisterCustomHandler( "Export All", () =>
+                {
+                    using ( var folderBrowseDialog = new VistaFolderBrowserDialog() )
+                    {
+                        folderBrowseDialog.Description = "Select a folder to save textures to.";
+                        folderBrowseDialog.UseDescriptionForTitle = true;
+
+                        if ( folderBrowseDialog.ShowDialog() != DialogResult.OK )
+                            return;
+
+                        foreach ( var texture in Data.Textures )
+                        {
+                            if ( !TextureFormatUtilities.IsCompressed( texture.Format ) || texture.IsYCbCr )
+                                TextureDecoder.DecodeToPNG( texture, Path.Combine( folderBrowseDialog.SelectedPath, $"{texture.Name}.png" ) );
+                            else
+                                TextureDecoder.DecodeToDDS( texture, Path.Combine( folderBrowseDialog.SelectedPath, $"{texture.Name}.dds" ) );
+                        }
+                    }
+                }, Keys.Control | Keys.Shift | Keys.E );
+            
+            base.Initialize();
+        }
+
+        protected override void PopulateCore()
+        {
+            if ( Parent != null && Name.EndsWith( ".txd", StringComparison.OrdinalIgnoreCase ) )
+            {
+                var textureDatabaseNode = 
+                    Parent.FindNode<TextureDatabaseNode>( Path.ChangeExtension( Name, "txi" ) );
+
+                if ( textureDatabaseNode != null && Data.Textures.Count == textureDatabaseNode.Data.Textures.Count )
+                {
+                    for ( int i = 0; i < Data.Textures.Count; i++ )
+                    {
+                        var texture = Data.Textures[ i ];
+                        var textureEntry = textureDatabaseNode.Data.Textures[ i ];
+
+                        texture.Name = textureEntry.Name;
+                        texture.Id = textureEntry.Id;
+                    }
+
+                    mTextureDatabaseNode = textureDatabaseNode;
+                }
+            }
+
+            Nodes.Add( new ListNode<Texture>( "Textures", Data.Textures, x => x.Name ) );
+        }
+
+        protected override void SynchronizeCore()
+        {
+            if ( mTextureDatabaseNode == null )
+                return;
+
+            var textureDatabase = new TextureDatabase();
+            foreach ( var texture in Data.Textures )
+                textureDatabase.Textures.Add( new TextureEntry
+                {
+                    Id = texture.Id,
+                    Name = texture.Name,
+                } );
+
+            mTextureDatabaseNode.Replace( textureDatabase );
+        }
+
+        public TextureSetNode( string name, TextureSet data ) : base( name, data )
+        {
+        }
+
+        public TextureSetNode( string name, Func<Stream> streamGetter ) : base( name, streamGetter )
+        {
+        }
+    }
+}

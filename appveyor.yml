@@ -1,0 +1,27 @@
+image: Visual Studio 2017
+configuration: Release
+
+before_build:
+    - cmd: nuget restore
+
+build:
+    project: LukaLukaLibrary.sln
+
+after_build:
+    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on LukaLukaModel.7z ./LukaLukaModel/bin/Release/*
+    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on LukaLukaLibrary.7z ./LukaLukaLibrary/bin/Release/*
+    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on DatabaseConverter.7z ./CliTools/DatabaseConverter/bin/Release/*
+    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on FarcPack.7z ./CliTools/FarcPack/bin/Release/*
+    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on TxpConverter.7z ./CliTools/TxpConverter/bin/Release/*
+
+artifacts:
+    - path: LukaLukaModel.7z
+      name: LukaLukaModel
+    - path: LukaLukaLibrary.7z
+      name: LukaLukaLibrary
+    - path: DatabaseConverter.7z
+      name: DatabaseConverter
+    - path: FarcPack.7z
+      name: FarcPack
+    - path: TxpConverter.7z
+      name: TxpConverter

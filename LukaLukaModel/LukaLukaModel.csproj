@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C79FAC4B-D1DD-4F2D-BC92-A72C00E07931}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>LukaLukaModel</RootNamespace>
+    <AssemblyName>LukaLukaModel</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>2</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowedReferenceRelatedFileExtensions>
+        .LukaLukaNiShiteAgeru
+    </AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>LukaSlow2x.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AssimpNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=0d51b391f59f42a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\AssimpNet.4.1.0\lib\net40\AssimpNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ookii.Dialogs.WinForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ookii.Dialogs.WinForms.1.0.0\lib\net45\Ookii.Dialogs.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.GLControl.3.0.1\lib\net20\OpenTK.GLControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configurations\Configuration.cs" />
+    <Compile Include="Configurations\ConfigurationList.cs" />
+    <Compile Include="GUI\Forms\FarcArchiveViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\FarcArchiveViewForm.Designer.cs">
+      <DependentUpon>FarcArchiveViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Archives\FarcArchiveModule.cs" />
+    <Compile Include="Modules\Databases\BoneDatabaseModule.cs" />
+    <Compile Include="Modules\Databases\MotionDatabaseModule.cs" />
+    <Compile Include="Modules\Databases\ObjectDatabaseModule.cs" />
+    <Compile Include="Modules\Databases\SpriteSetModule.cs" />
+    <Compile Include="Modules\Databases\TextureDatabaseModule.cs" />
+    <Compile Include="Modules\FormatModule.cs" />
+    <Compile Include="Modules\FormatModuleRegistry.cs" />
+    <Compile Include="Modules\IFormatModule.cs" />
+    <Compile Include="Modules\Imaging\BitmapModule.cs" />
+    <Compile Include="Modules\IO\StreamModule.cs" />
+    <Compile Include="Modules\Models\AssimpSceneModule.cs" />
+    <Compile Include="Modules\Models\ModelModule.cs" />
+    <Compile Include="Modules\ModuleExportUtilities.cs" />
+    <Compile Include="Modules\ModuleFilterGenerator.cs" />
+    <Compile Include="Modules\ModuleImportUtilities.cs" />
+    <Compile Include="Modules\Motions\MotionModule.cs" />
+    <Compile Include="Modules\Motions\MotionSetModule.cs" />
+    <Compile Include="Modules\Sprites\SpriteSetModule.cs" />
+    <Compile Include="Modules\Textures\TextureModule.cs" />
+    <Compile Include="Modules\Textures\TextureSetModule.cs" />
+    <Compile Include="Modules\Xml\XmlDocumentModule.cs" />
+    <Compile Include="Nodes\Archives\FarcArchiveNode.cs" />
+    <Compile Include="Nodes\Databases\SpriteDatabaseNode.cs" />
+    <Compile Include="Nodes\Databases\TextureDatabaseNode.cs" />
+    <Compile Include="Nodes\INode.cs" />
+    <Compile Include="Nodes\IO\BinaryFileNode.cs" />
+    <Compile Include="Nodes\IO\IDirtyNode.cs" />
+    <Compile Include="Nodes\IO\StreamNode.cs" />
+    <Compile Include="Nodes\Materials\MaterialNode.cs" />
+    <Compile Include="Nodes\Materials\MaterialTextureNode.cs" />
+    <Compile Include="Nodes\Misc\ListNode.cs" />
+    <Compile Include="Nodes\Misc\ReferenceNode.cs" />
+    <Compile Include="Nodes\Models\BoneNode.cs" />
+    <Compile Include="Nodes\Models\ExDataNode.cs" />
+    <Compile Include="Nodes\Models\IndexTableNode.cs" />
+    <Compile Include="Nodes\Models\MeshNode.cs" />
+    <Compile Include="Nodes\Models\ModelNode.cs" />
+    <Compile Include="Nodes\Models\SkinNode.cs" />
+    <Compile Include="Nodes\Models\SubMeshNode.cs" />
+    <Compile Include="Nodes\Motions\KeyControllerNode.cs" />
+    <Compile Include="Nodes\Motions\KeySetNode.cs" />
+    <Compile Include="Nodes\Motions\KeySetVectorNode.cs" />
+    <Compile Include="Nodes\Motions\MotionControllerNode.cs" />
+    <Compile Include="Nodes\Motions\MotionNode.cs" />
+    <Compile Include="Nodes\Motions\MotionSetNode.cs" />
+    <Compile Include="Nodes\Node.cs" />
+    <Compile Include="Nodes\NodeEventArgs.cs" />
+    <Compile Include="Nodes\NodeFactory.cs" />
+    <Compile Include="Nodes\Sprites\SpriteNode.cs" />
+    <Compile Include="Nodes\Sprites\SpriteSetNode.cs" />
+    <Compile Include="Nodes\Textures\TextureNode.cs" />
+    <Compile Include="Nodes\Textures\TextureSetNode.cs" />
+    <Compile Include="Nodes\TypeConverters\ColorTypeConverter.cs" />
+    <Compile Include="Nodes\TypeConverters\Int32HexTypeConverter.cs" />
+    <Compile Include="Nodes\TypeConverters\VectorTypeConverter.cs" />
+    <Compile Include="Nodes\Wrappers\NodeAsTreeNode.cs" />
+    <Compile Include="GUI\Controls\ModelViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ModelViewControl.Designer.cs">
+      <DependentUpon>ModelViewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ModelView\GLBuffer.cs" />
+    <Compile Include="GUI\Controls\ModelView\GLIndexTable.cs" />
+    <Compile Include="GUI\Controls\ModelView\GLMaterial.cs" />
+    <Compile Include="GUI\Controls\ModelView\GLMesh.cs" />
+    <Compile Include="GUI\Controls\ModelView\GLModel.cs" />
+    <Compile Include="GUI\Controls\ModelView\GLShaderProgram.cs" />
+    <Compile Include="GUI\Controls\ModelView\GLSubMesh.cs" />
+    <Compile Include="GUI\Controls\ModelView\GLTexture.cs" />
+    <Compile Include="GUI\Controls\ModelView\IGLDraw.cs" />
+    <Compile Include="GUI\Controls\TextureViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\TextureViewControl.Designer.cs">
+      <DependentUpon>TextureViewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\ConfigurationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\ConfigurationForm.Designer.cs">
+      <DependentUpon>ConfigurationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Nodes\Wrappers\NodeTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\ResourceStore.cs" />
+    <EmbeddedResource Include="GUI\Controls\ModelViewControl.resx">
+      <DependentUpon>ModelViewControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\TextureViewControl.resx">
+      <DependentUpon>TextureViewControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\ConfigurationForm.resx">
+      <DependentUpon>ConfigurationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\FarcArchiveViewForm.resx">
+      <DependentUpon>FarcArchiveViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Resources\Shaders\Default.frag">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Shaders\Default.vert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Shaders\DefaultBasic.frag">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Shaders\DefaultBasic.vert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Shaders\Grid.frag">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Shaders\Grid.vert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OpenTK.dll.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LukaLukaLibrary\LukaLukaLibrary.csproj">
+      <Project>{9c7171ca-7379-458f-a9ca-293bbf2c74dc}</Project>
+      <Name>LukaLukaLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LukaSlow2x.ico" />
+    <Content Include="Resources\Icons\Motion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\Icons\TextureSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\Texture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\MaterialTexture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\Material.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\Model.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\Mesh.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\File.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\Archive.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\Rename.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\Remove.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\Node.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\MoveUp.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\MoveDown.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\Import.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\Folder.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\Export.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AssimpNet.4.1.0\build\AssimpNet.targets" Condition="Exists('..\packages\AssimpNet.4.1.0\build\AssimpNet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\AssimpNet.4.1.0\build\AssimpNet.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AssimpNet.4.1.0\build\AssimpNet.targets'))" />
+  </Target>
+</Project>
