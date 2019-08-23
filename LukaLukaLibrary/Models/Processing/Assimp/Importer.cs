@@ -117,7 +117,7 @@ namespace LukaLukaLibrary.Models.Processing.Assimp
         {
             Material material = new Material();
 
-            material.Shader = "BLINN";
+            material.Shader = "SKIN";
             material.Field02 = 2688;
             material.Name = aiMaterial.Name;
             material.Field25 = 1;
